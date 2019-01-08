@@ -1,5 +1,11 @@
 language: go
 
+# needed for the nfpm pipe
+addons:
+  apt:
+    packages:
+    - rpm
+
 services:
   - redis-server
 
@@ -21,10 +27,13 @@ script:
   - export PATH="$PATH:$GOBIN"
   # Fix dir names
   - cd $GOPATH/src/github.com/
+  - mv Clivern/Beaver Clivern/beaver
   - mv Clivern clivern
-  - cd clivern/goplg
+  - cd clivern/beaver
+  - mv config.travis.yml config.test.yml
   # Config & execute ci tasks
   - make install_revive
+  - cp config.yml config.dist.yml
   - make ci
 
 matrix:
@@ -32,3 +41,11 @@ matrix:
   allow_failures:
   - go: 1.9.x
   - go: 1.10.x
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: curl -sL http://git.io/goreleaser | bash
+  on:
+    tags: true
+    condition: $TRAVIS_OS_NAME = linux  
