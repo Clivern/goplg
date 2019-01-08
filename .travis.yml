@@ -27,13 +27,10 @@ script:
   - export PATH="$PATH:$GOBIN"
   # Fix dir names
   - cd $GOPATH/src/github.com/
-  - mv Clivern/Beaver Clivern/beaver
   - mv Clivern clivern
-  - cd clivern/beaver
-  - mv config.travis.yml config.test.yml
+  - cd clivern/goplg
   # Config & execute ci tasks
   - make install_revive
-  - cp config.yml config.dist.yml
   - make ci
 
 matrix:
