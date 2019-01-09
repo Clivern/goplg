@@ -35,7 +35,7 @@ script:
   # Fix testing change the files and deploy failed
   - git status
   - git diff > diff.log
-  - echo diff.log
+  - cat diff.log
   - git clean -fd
   - git reset --hard
 
