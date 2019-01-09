@@ -33,6 +33,7 @@ script:
   - make install_revive
   - make ci
   # Fix testing change the files and deploy failed
+  - git status
   - git clean -fd
   - git reset --hard
 
