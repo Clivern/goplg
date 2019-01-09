@@ -32,6 +32,9 @@ script:
   # Config & execute ci tasks
   - make install_revive
   - make ci
+  # Fix testing change the files and deploy failed
+  - git clean -fd
+  - git reset --hard
 
 matrix:
   include:
@@ -45,4 +48,4 @@ deploy:
   script: curl -sL http://git.io/goreleaser | bash
   on:
     tags: true
-    condition: $TRAVIS_OS_NAME = linux  
+    condition: $TRAVIS_OS_NAME = linux
