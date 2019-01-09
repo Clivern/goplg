@@ -32,7 +32,7 @@ script:
   # Config & execute ci tasks
   - make install_revive
   - make ci
-  # Fix testing change the files and deploy failed
+  # Workaround to clear any package used for testing only
   - git status
   - git diff > diff.log
   - cat diff.log
